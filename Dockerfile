@@ -9,8 +9,11 @@ RUN set -eux; \
 	curl -fsS https://dlang.org/install.sh | bash -s dmd-${DMD_STABLE_VERSION}; \
 	mkdir /dlang-build
 
-#
 WORKDIR /dlang-build
-ADD build-and-test.sh /dlang-build
+ADD build_and_run.d /dlang-build
 
-CMD [ "bash", "build-and-test.sh" ]
+RUN . ~/dlang/dmd-${DMD_STABLE_VERSION}/activate; \
+    dmd -g -debug build_and_run.d; \
+    chmod +x build_and_run
+
+ENTRYPOINT [ "./build_and_run" ]
