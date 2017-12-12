@@ -16,4 +16,5 @@ RUN . ~/dlang/dmd-${DMD_STABLE_VERSION}/activate; \
     dmd -g -debug build_and_run.d; \
     chmod +x build_and_run
 
-ENTRYPOINT [ "./build_and_run" ]
+ENTRYPOINT ["/dlang-build/build_and_run"]
+CMD ["--help"]
